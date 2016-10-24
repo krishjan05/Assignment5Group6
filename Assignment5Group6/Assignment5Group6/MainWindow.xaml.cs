@@ -32,18 +32,18 @@ namespace Assignment5Group6
         public void CalcSalary()
         {
             int numberOfDays;
-            int totalSalary = 1;
+            double totalSalary;
             string path = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string fullPath = System.IO.Path.Combine(path, DIRNAME);
             Directory.CreateDirectory(fullPath);
             string filePath = System.IO.Path.Combine(fullPath, FILENAME);
-            StreamWriter sw = File.CreateText(filePath);
+            StreamWriter sw = File.AppendText(filePath);
             if (int.TryParse(txtNumberOfDay.Text, out numberOfDays))
             {
-                for (int i = 1; i <= numberOfDays; i++)
+                for (int i = 0; i < numberOfDays; i++)
                 {
-                    totalSalary = i * INCREMENT_FACTOR;
-                    string finalResult = i + " " + totalSalary;
+                    totalSalary = Math.Pow(2, i);
+                    string finalResult = (i+1) + " " + totalSalary;
                     lstSalary.Items.Add(finalResult);
                     sw.WriteLine(finalResult);
                 }
@@ -63,18 +63,5 @@ namespace Assignment5Group6
             lstSalary.Items.Clear();
             txtNumberOfDay.Text = "";
         }
-       /* public void saveToFile()
-        {
-            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string fullPath = System.IO.Path.Combine(path, DIRNAME);
-            Directory.CreateDirectory(fullPath);
-            string filePath = System.IO.Path.Combine(fullPath, FILENAME);
-            StreamWriter sw = File.CreateText(filePath);
-            foreach(string listItem in lstSalary.Items)
-            {
-                sw.WriteLine(finalResult);
-            }
-
-        }*/
     }
 }
